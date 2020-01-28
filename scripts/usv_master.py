@@ -16,6 +16,8 @@
 
 import subprocess
 
+import subprocess
+
 import rospy
 from std_msgs.msg import Empty
 from std_msgs.msg import Int32
