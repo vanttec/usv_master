@@ -74,27 +74,27 @@ def main():
     
     while not rospy.is_shutdown():    
       
-        if (usvMaster.xbee_message)== "CA" or (usvMaster.xbee_message)== "ca" :
+        if (usvMaster.xbee_message == "CA") or (usvMaster.xbee_message == "ca"):
             usvMaster.boat_current_mission_pub.publish("Course Alpha")
 
-        elif (usvMaster.xbee_message)== "CB" or (usvMaster.xbee_message)== "cb":
+        elif (usvMaster.xbee_message == "CB") or (usvMaster.xbee_message == "cb"):
             usvMaster.boat_current_mission_pub.publish("Course Beta")
             
-        elif (usvMaster.xbee_message)== "CC" or  (usvMaster.xbee_message)== "cc":
+        elif (usvMaster.xbee_message == "CC") or  (usvMaster.xbee_message == "cc"):
             usvMaster.boat_current_mission_pub.publish("Course Charlie")
             
-        elif (usvMaster.xbee_message)== "AN" or  (usvMaster.xbee_message)== "an":
+        elif (usvMaster.xbee_message == "AN") or  (usvMaster.xbee_message == "an"):
             current_node = subprocess.Popen("rosrun rb_missions auto_nav_position.py", shell = True)
             usvMaster.xbee_message= ""
-            while usvMaster.mission_status != 1 and  usvMaster.kill_switch!=True and not rospy.is_shutdown():
+            while (usvMaster.mission_status != 1) and  (usvMaster.kill_switch!=True) and (not rospy.is_shutdown()):
                  usvMaster.boat_current_mission_pub.publish("Atonomous Navigation")
                  rate.sleep()
             current_node.kill()
                          
-        elif (usvMaster.xbee_message)== "SP" or (usvMaster.xbee_message)== "sp":
+        elif (usvMaster.xbee_message == "SP") or (usvMaster.xbee_message == "sp"):
             current_node = subprocess.Popen("rosrun rb_missions speed_ch.py", shell = True)
             usvMaster.xbee_message= ""
-            while usvMaster.mission_status != 1 and usvMaster.kill_switch!=True and not rospy.is_shutdown():
+            while (usvMaster.mission_status != 1) and (usvMaster.kill_switch!=True) and (not rospy.is_shutdown()):
                  usvMaster.boat_current_mission_pub.publish("Speed Challenge")
                  rate.sleep()
             current_node.kill()
